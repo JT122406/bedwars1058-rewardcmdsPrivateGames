@@ -1,5 +1,6 @@
 package com.andrei1058.bedwars.cmds.listeners;
 
+import club.mher.privategames.api.PrivateGames;
 import com.andrei1058.bedwars.api.arena.GameState;
 import com.andrei1058.bedwars.api.events.gameplay.GameStateChangeEvent;
 import com.andrei1058.bedwars.cmds.ConfigPath;
@@ -15,7 +16,8 @@ public class WinListener implements Listener {
 
     @EventHandler
     public void onWin(GameStateChangeEvent e) {
-        if (e.getNewState() == GameState.restarting) {
+        PrivateGames privateGamesAPI = Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider();
+        if (e.getNewState() == GameState.restarting  && !privateGamesAPI.getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) {
             Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
                 for (Player p : e.getArena().getPlayers()) {
                     for (String s : Main.getCfg().getYml().getStringList(ConfigPath.GAME_WIN_WINNER_CMDS_AS_PLAYER)) {
