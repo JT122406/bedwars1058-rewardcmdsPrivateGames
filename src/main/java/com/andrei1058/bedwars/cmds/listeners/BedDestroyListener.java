@@ -14,8 +14,8 @@ public class BedDestroyListener implements Listener {
     @EventHandler
     public void onBedDestroy(PlayerBedBreakEvent e) {
 
-        PrivateGames privateGamesAPI = Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider();
-        if (privateGamesAPI.getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+
+        if (Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
 
         for (String s : Main.getCfg().getYml().getStringList(ConfigPath.BED_DESTROY_FOR_DESTROYER_AS_PLAYER)) {
             if (s.trim().isEmpty()) continue;

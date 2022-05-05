@@ -15,8 +15,7 @@ public class FinalKillsListener implements Listener {
     @EventHandler
     public void onFinalKill(PlayerKillEvent e) {
 
-        PrivateGames privateGamesAPI = Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider();
-        if (privateGamesAPI.getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+        if (Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
 
         if (!e.getCause().toString().contains("FINAL_KILL")) return;
         Player killer = e.getKiller(), victim = e.getVictim();
