@@ -1,6 +1,5 @@
 package com.andrei1058.bedwars.cmds.listeners;
 
-import club.mher.privategames.api.PrivateGames;
 import com.andrei1058.bedwars.api.events.gameplay.GameEndEvent;
 import com.andrei1058.bedwars.cmds.ConfigPath;
 import com.andrei1058.bedwars.cmds.Main;
@@ -17,8 +16,11 @@ public class WinListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onWin(GameEndEvent e) {
-
-        if (Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+        if (!Main.getPlugin().getPrivateGames().isEmpty())
+            if (Main.getPlugin().getPrivateGames().contains(e.getArena())){  //game is a private game
+                Main.getPlugin().removePrivateGame(e.getArena());
+                return;
+            }
 
         Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
             for (UUID uuid : e.getWinners()) {
@@ -29,6 +31,6 @@ public class WinListener implements Listener {
                             .replace("{group}", e.getArena().getGroup()));
                     }
                 }
-            }, 10L);
+            }, 15L);
     }
 }
