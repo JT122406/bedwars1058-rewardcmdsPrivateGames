@@ -1,5 +1,6 @@
 package com.andrei1058.bedwars.cmds.listeners;
 
+import club.mher.privategames.api.PrivateGames;
 import com.andrei1058.bedwars.api.events.player.PlayerKillEvent;
 import com.andrei1058.bedwars.cmds.ConfigPath;
 import com.andrei1058.bedwars.cmds.Main;
@@ -12,6 +13,10 @@ public class RegularKillsListener implements Listener {
 
     @EventHandler
     public void onRegularKill(PlayerKillEvent e) {
+
+        PrivateGames privateGamesAPI = Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider();
+        if (privateGamesAPI.getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+
         if (e.getCause().toString().contains("FINAL_KILL")) return;
         Player killer = e.getKiller(), victim = e.getVictim();
 

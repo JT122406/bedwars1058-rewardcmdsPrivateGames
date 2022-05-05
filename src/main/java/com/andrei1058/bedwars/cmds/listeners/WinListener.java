@@ -16,8 +16,11 @@ public class WinListener implements Listener {
 
     @EventHandler
     public void onWin(GameStateChangeEvent e) {
+
         PrivateGames privateGamesAPI = Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider();
-        if (e.getNewState() == GameState.restarting  && !privateGamesAPI.getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) {
+        if (privateGamesAPI.getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+
+        if (e.getNewState() == GameState.restarting) {
             Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
                 for (Player p : e.getArena().getPlayers()) {
                     for (String s : Main.getCfg().getYml().getStringList(ConfigPath.GAME_WIN_WINNER_CMDS_AS_PLAYER)) {
