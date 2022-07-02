@@ -1,6 +1,6 @@
 package com.andrei1058.bedwars.cmds;
 
-import com.andrei1058.bedwars.api.BedWars;
+import club.mher.privategames.api.PrivateGames;
 import com.andrei1058.bedwars.api.arena.IArena;
 import com.andrei1058.bedwars.api.configuration.ConfigManager;
 import com.andrei1058.bedwars.cmds.listeners.*;
@@ -16,9 +16,11 @@ public class Main extends JavaPlugin implements Listener {
 
     private static Main plugin;
     private static ConfigManager cfg;
-    public static BedWars api;
+    //public static BedWars api;
 
-    private ArrayList<IArena> privategames = new ArrayList<>();
+    private static PrivateGames privateGamesAPI;
+
+    private final ArrayList<IArena> privategames = new ArrayList<>();
 
     public void onEnable() {
         plugin = this;
@@ -37,7 +39,7 @@ public class Main extends JavaPlugin implements Listener {
             return;
         }
 
-        api = Bukkit.getServicesManager().getRegistration(BedWars.class).getProvider();
+        //api = Bukkit.getServicesManager().getRegistration(BedWars.class).getProvider();
 
         /* Setup configuration */
         cfg = new ConfigManager(this, "config", "plugins/BedWars1058/Addons/Cmds");
@@ -45,6 +47,7 @@ public class Main extends JavaPlugin implements Listener {
 
         if (Bukkit.getPluginManager().isPluginEnabled("BedWars1058-PrivateGames")){
             Bukkit.getPluginManager().registerEvents(new PrivateGameListener(), getPlugin());
+            privateGamesAPI = Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider();
         }
 
         /* Register listeners */
@@ -118,4 +121,6 @@ public class Main extends JavaPlugin implements Listener {
     public ArrayList<IArena> getPrivateGames(){return this.privategames;}
 
     public void removePrivateGame(IArena hey){this.privategames.remove(hey);}
+
+    public PrivateGames getPrivateGamesAPI() {return privateGamesAPI;}
 }

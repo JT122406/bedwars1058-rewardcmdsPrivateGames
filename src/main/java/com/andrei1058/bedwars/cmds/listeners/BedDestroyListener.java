@@ -1,6 +1,5 @@
 package com.andrei1058.bedwars.cmds.listeners;
 
-import club.mher.privategames.api.PrivateGames;
 import com.andrei1058.bedwars.api.events.player.PlayerBedBreakEvent;
 import com.andrei1058.bedwars.cmds.ConfigPath;
 import com.andrei1058.bedwars.cmds.Main;
@@ -15,7 +14,7 @@ public class BedDestroyListener implements Listener {
     public void onBedDestroy(PlayerBedBreakEvent e) {
 
 
-        if (Bukkit.getServicesManager().getRegistration(PrivateGames.class).getProvider().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+        if (Main.getPlugin().getPrivateGamesAPI().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
 
         for (String s : Main.getCfg().getYml().getStringList(ConfigPath.BED_DESTROY_FOR_DESTROYER_AS_PLAYER)) {
             if (s.trim().isEmpty()) continue;
