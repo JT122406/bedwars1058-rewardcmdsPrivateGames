@@ -18,7 +18,7 @@ public class Main extends JavaPlugin implements Listener {
     private static ConfigManager cfg;
     //public static BedWars api;
 
-    private static PrivateGames privateGamesAPI;
+    private static PrivateGames privateGamesAPI = null;
 
     private final ArrayList<IArena> privategames = new ArrayList<>();
 

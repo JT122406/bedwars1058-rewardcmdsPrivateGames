@@ -14,7 +14,8 @@ public class FinalKillsListener implements Listener {
     @EventHandler
     public void onFinalKill(PlayerKillEvent e) {
 
-        if (Main.getPlugin().getPrivateGamesAPI().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
+        if (Main.getPlugin().getPrivateGamesAPI() == null) return;
+        else if (Main.getPlugin().getPrivateGamesAPI().getPrivateGameUtil().isPrivateGame(e.getArena().getArenaName())) return;
 
         if (!e.getCause().toString().contains("FINAL_KILL")) return;
         Player killer = e.getKiller(), victim = e.getVictim();
