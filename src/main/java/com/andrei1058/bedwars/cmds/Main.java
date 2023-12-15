@@ -116,7 +116,7 @@ public class Main extends JavaPlugin implements Listener {
         return cfg;
     }
 
-    public void addPrivateGame(IArena hey){this.privategames.add(hey);}
+    public void addPrivateGame(IArena arena){this.privategames.add(arena);}
 
     public ArrayList<IArena> getPrivateGames(){return this.privategames;}
 

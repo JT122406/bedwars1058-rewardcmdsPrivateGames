@@ -15,7 +15,7 @@ import static com.andrei1058.bedwars.cmds.Main.getPlugin;
 public class WinListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onWin(GameEndEvent e) {
+    public void onGameEnd(GameEndEvent e) {
         if (!Main.getPlugin().getPrivateGames().isEmpty())
             if (Main.getPlugin().getPrivateGames().contains(e.getArena())){  //game is a private game
                 Main.getPlugin().removePrivateGame(e.getArena());

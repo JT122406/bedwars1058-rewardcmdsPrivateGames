@@ -10,7 +10,7 @@ public class PrivateGameListener implements Listener {
 
     @EventHandler
     public void onCreate(GameStateChangeEvent event){
-        if (event.getNewState()  == GameState.playing){  //game is playing
+        if (event.getNewState() == GameState.playing){  //game is playing
             if (Main.getPlugin().getPrivateGamesAPI().getPrivateGameUtil().isPrivateGame(event.getArena().getArenaName())) {
                 Main.getPlugin().addPrivateGame(event.getArena());
             }
